@@ -46,5 +46,20 @@ function playSound(event) {
 
 // Change the volumn and the image
 function changeSound (event) {
-  
+  const range_val = event.target.value;
+  const vol_img = document.querySelector("#volume-controls img");
+  if (range_val >= 1 && range_val < 33){
+    vol_img.src = 'assets/icons/volume-level-1.svg';
+  }
+  else if (range_val >= 33 && range_val < 67){
+    vol_img.src = 'assets/icons/volume-level-2.svg';
+  }
+  else if (range_val >= 67){
+    vol_img.src = 'assets/icons/volume-level-3.svg';
+  }
+  else if (range_val == 0){
+    vol_img.src = 'assets/icons/volume-level-0.svg';
+  }
+  const audio = document.querySelector(".hidden");
+  audio.volume = range_val / 100;
 }
