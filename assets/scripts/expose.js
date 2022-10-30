@@ -2,7 +2,10 @@
 
 window.addEventListener('DOMContentLoaded', init);
 
-
+// Initialize Jsconfetti
+const jsConfetti = new JSConfetti();
+jsConfetti.x = 0;
+jsConfetti.y = 0;
 
 function init() {
   // TODO
@@ -40,7 +43,13 @@ function changeImage(event)
 
 // Play the corresponding sound upon the selected horn
 function playSound(event) {
+  const selectElement = document.getElementById('horn-select');
+  const value = selectElement.value;
+  if (value == "party-horn") {
+    jsConfetti.addConfetti();
+  }
   const audio = document.querySelector(".hidden");
+  audio.load();
   audio.play();
 }
 
@@ -50,15 +59,19 @@ function changeSound (event) {
   const vol_img = document.querySelector("#volume-controls img");
   if (range_val >= 1 && range_val < 33){
     vol_img.src = 'assets/icons/volume-level-1.svg';
+    vol_img.alt = "Volume level 1";
   }
   else if (range_val >= 33 && range_val < 67){
     vol_img.src = 'assets/icons/volume-level-2.svg';
+    vol_img.alt = "Volume level 2";
   }
   else if (range_val >= 67){
     vol_img.src = 'assets/icons/volume-level-3.svg';
+    vol_img.alt = "Volume level 3";
   }
   else if (range_val == 0){
     vol_img.src = 'assets/icons/volume-level-0.svg';
+    vol_img.alt = "Volume level 0";
   }
   const audio = document.querySelector(".hidden");
   audio.volume = range_val / 100;
